@@ -9,7 +9,7 @@ window.onload = function () {
 function generate() {
   numStat = new Map();
   extraStat = new Map();
-  var gl = generateSetsList(1000, 37);
+  var gl = generateSetsList(3490, 37);
   let best = findPopularSet(gl);
   document.getElementById("weight").innerHTML = "( " + best.weight + " )";
   document.getElementById("genNumber").innerHTML = best.pSet;
@@ -22,7 +22,6 @@ function generate() {
     popSet: best.pSet,
     extra: bestExtra.pSet,
   });
-  
 
   history.sort(function (a, b) {
     return b.weight - a.weight;
