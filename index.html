@@ -46,6 +46,25 @@
           margin-left: 0;
         }
       }
+
+      
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
     </style>
   </head>
   <body class="w3-black">
@@ -126,7 +145,7 @@
         <h1  id="weight" style="color: yellow">weight</h1>
         <h1 class="w3-text-light-grey " id="genNumber">numbers</h1>
         <h1  id="extra" style="color: greenyellow">extra</h1>
-        <h1 class="w3-button w3-red" style="margin: 10%" onclick="generate()">GENERATE</h1>
+        <h3 class="w3-button w3-red" style="margin: 10%" onclick="generate()">GENERATE</h3>
       </div>
       <br />
 
@@ -148,8 +167,8 @@
     <hr style="width:200px" class="w3-opacity">
     <p>Results ftom Lottery site
     </p>
-  <div style="border: 3px solid rgb(201, 0, 1); overflow: hidden; margin: 15px auto; max-width: 550px;">
-    <iframe scrolling="no" src="https://www.pais.co.il/lotto/" style="border: 0px none; margin-left: -235px; height: 750px; margin-top: -300px; width: 800px;">
+  <div class="container" style="border: 3px solid rgb(201, 0, 1); overflow: hidden; margin: 15px auto; max-width: 550px;">
+    <iframe class="responsive-iframe" scrolling="yes" src="https://www.pais.co.il/lotto/" style="border: 0px none; margin-left: -235px; height: 750px; margin-top: -300px; width: 800px;">
     </iframe>
     </div>
   <!-- End History Section -->

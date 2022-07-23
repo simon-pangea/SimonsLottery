@@ -30,13 +30,13 @@ function generate() {
 
   var histData = history.map(
     (x) =>
-      "<li><h2> (" +
+      "<li><h3> (" +
       x.weight +
       ") " +
       x.popSet +
       " --> " +
       x.extra +
-      "</h2></li>"
+      "</h3></li>"
   );
   document.getElementById("hData").innerHTML = histData;
 }
