@@ -9,13 +9,22 @@ window.onload = function () {
 function generate() {
   numStat = new Map();
   extraStat = new Map();
-  var gl = generateSetsList(3490, 37);
+
+  var gel = generateExtrassList(
+    document.getElementById("numberOfSets").value,
+    7
+  );
+  let bestExtra = findPopularExtra(gel);
+
+  var gl = generateSetsList(
+    document.getElementById("numberOfSets").value,
+    37,
+    bestExtra.pSet
+  );
   let best = findPopularSet(gl);
+
   document.getElementById("weight").innerHTML = "( " + best.weight + " )";
   document.getElementById("genNumber").innerHTML = best.pSet;
-
-  var gel = generateExtrassList(1000, 7);
-  let bestExtra = findPopularExtra(gel);
   document.getElementById("extra").innerHTML = bestExtra.pSet;
   history.push({
     weight: best.weight,
@@ -40,27 +49,30 @@ function generate() {
   document.getElementById("hData").innerHTML = histData;
 }
 
-function generateSetsList(listSize, maxBall) {
+function generateSetsList(listSize, maxBall, plusNum) {
   var listResults = [];
   for (let i = 0; i < listSize; i++) {
-    listResults.push(generateOneSet(maxBall));
+    listResults.push(generateOneSet(maxBall, plusNum));
   }
   return listResults;
 }
 
-function generateOneSet(maxBall) {
+function generateOneSet(maxBall, plusNum) {
   var resultList = [];
   for (let i = 1; i < 7; i++) {
-    let num = Math.floor(Math.random() * maxBall) + 1;
-    if (!resultList.includes(num)) {
-      resultList.push(num);
-      numStat.set(
-        num,
-        numStat.get(num) !== undefined ? numStat.get(num) + 1 : 1
-      );
-    } else {
-      i--;
+    let num = Math.floor(Math.random() * maxBall) + 1 + parseInt(plusNum);
+    if (num > maxBall) {
+      num = num - maxBall;
     }
+      if (!resultList.includes(num)) {
+        resultList.push(num);
+        numStat.set(
+          num,
+          numStat.get(num) !== undefined ? numStat.get(num) + 1 : 1
+        );
+      } else {
+        i--;
+      }
   }
 
   resultList.sort(function (a, b) {
@@ -122,7 +134,7 @@ function findPopularExtra(lr) {
   lr.forEach((element) => {
     let w = 0;
     element.forEach((e) => {
-      w += numStat.get(e);
+      w += extraStat.get(e);
     });
     if (w > maxWeight) {
       maxWeight = w;
